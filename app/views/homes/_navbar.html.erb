@@ -1,40 +1,69 @@
 <% if student_signed_in? %>
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link disabled "><%= current_student.name.capitalize%></a>
-  </li>
-  <li class="nav-item">
-  <button class=" nav-link btn btn-primary position-relative pt-0">
-    <%= link_to 'Students', class: "nav-link"%>
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    <span class="visually-hidden">unread messages</span>
-  </span>
-</button>
-  </li>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <li class="nav-item">
-    <%= link_to 'Add New Student', new_student_session_path, class: "btn btn-primary"%>
-  </li>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <li class="nav-item">
-    <%= link_to 'Add New suggestion', class: "btn btn-primary button"%>
-    
-  </li>
-  <li class="nav-item" style="margin-left:59%">
-    <%= link_to 'logout', destroy_student_session_path, method: :destroy, class: "nav-link"%>
-  </li>
-</ul>
-<% else %>
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link">Stranger</a>
-  </li>
-  <li class="nav-item" style="margin-left:79%">
-    <%= link_to 'Sign up', new_student_registration_path, class: "nav-link"%>
-  </li>
+  <% if current_student.role == false%>
+    <ul class="nav nav-pills mt-3">
     <li class="nav-item">
-    <%= link_to 'Sign in', new_student_session_path, class: "nav-link"%>
-  </li>
-</ul>
+        <a class="nav-link disabled ">Admin</a>
+    </li>
+    <li class="nav-item">
+        <button class=" nav-link btn btn-primary position-relative pt-0">
+        <%= link_to 'Courses', class: "nav-link"%>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        <span class="visually-hidden">unread messages</span>
+        </span>
+        </button>
+    </li>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <li class="nav-item">
+        <button class=" nav-link btn btn-primary position-relative pt-0">
+        <%= link_to 'Students', class: "nav-link"%>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        <%= Student.count-1%>
+        <span class="visually-hidden">unread messages</span>
+        </span>
+        </button>
+    </li>
+    <li class="nav-item" style="margin-left:74%">
+        <%= link_to 'logout', destroy_student_session_path, method: :destroy, class: "nav-link"%>
+    </li>
+    </ul>
+  <% else %>
+    <ul class="nav nav-pills mt-3">
+    <li class="nav-item">
+        <a class="nav-link disabled "><%= current_student.name.capitalize%></a>
+    </li>
+    <li class="nav-item">
+        <button class=" nav-link btn btn-primary position-relative pt-0">
+        <%= link_to 'Courses', class: "nav-link"%>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        <span class="visually-hidden">unread messages</span>
+        </span>
+        </button>
+    </li>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <li class="nav-item">
+        <button class=" nav-link btn btn-primary position-relative pt-0">
+        <%= link_to 'Students', class: "nav-link"%>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        <%= Student.count-1%>
+        <span class="visually-hidden">unread messages</span>
+        </span>
+        </button>
+    </li>
+    <li class="nav-item" style="margin-left:74%">
+        <%= link_to 'logout', destroy_student_session_path, method: :destroy, class: "nav-link"%>
+    </li>
+    </ul>
+  <% end %>
+<% else %>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link">Stranger</a>
+    </li>
+    <li class="nav-item" style="margin-left:79%">
+      <%= link_to 'Sign up', new_student_registration_path, class: "nav-link"%>
+    </li>
+      <li class="nav-item">
+      <%= link_to 'Sign in', new_student_session_path, class: "nav-link"%>
+    </li>
+  </ul>
 <% end %>
-
