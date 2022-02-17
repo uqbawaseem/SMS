@@ -5,3 +5,6 @@ export default class extends Controller {
     this.element.textContent = "Hello World!"
   }
 }
+//= require jquery3
+//= require popper
+//= require bootstrap
