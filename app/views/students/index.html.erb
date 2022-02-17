@@ -1,0 +1,19 @@
+<%= render 'homes/navbar' %>
+<div class="container mt-5">
+    <h4>ALL STUDENTS</h4><br>
+    <table class="table table-bordered">
+        <tr>
+            <th>Roll #</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Register courses</th>
+        </tr>
+        <% @students.each do |s|%>
+        <tr>
+            <td><%= s.roll_no%></td>
+            <td><%= s.name%></td>
+            <td><%= s.email%></td>
+        </tr>
+        <% end %>
+      </table>
+</div>
