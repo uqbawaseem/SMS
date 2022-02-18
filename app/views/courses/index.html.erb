@@ -1,40 +1,49 @@
 <%= render 'homes/navbar' %>
 <div class="container mt-5">
-    <h4>ALL COURSES</h4><br>
-<% if current_student.role == true%>
-    <%= link_to 'CLICK TO FILTER YOUR REGISTER COURSES',new_course_path,class: "btn btn-primary" %> <br><br>
-    <table class="table table-bordered text-center">
-        <tr>
-            <th>Name</th>
-            <th colspan=2>Click To Register</th>
-            
-          
-
-        </tr>
-        <% @courses.each do |c|%>
-        <tr>
-        <td><%= c.name%></td>
-        <td colspan=2><%= link_to 'Register Now', registered_courses_path(course_id: c.id, student_id: current_student.id), method: :post, class: "btn btn-info", data: { confirm: 'Are you sure?' }%></td>
-
-        </tr>
-        <% end %>
+   <% if current_student.role == true%>
+   <button class="accordion text-primary"><strong>CLICK TO VIEW YOUR REGISTER COURSES</strong></button>
+   <div class="panel">
+      <table class="table table-bordered text-center">
+         <tr>
+            <th>Course</th>
+            <th>Grade</th>
+         </tr>
+         <% @st_courses.each do |st_co|%>
+         <tr>
+            <td><%= st_co.name.capitalize%></td>
+            <td><%= link_to 'View Grade', registered_course_path(st_co), class: "btn btn-info" %></td>
+         </tr>
+         <% end %>
       </table>
-
-<% else %>
-    <%= link_to 'ADD NEW COURSE', new_course_path, class: "btn btn-primary" %> <br><br>
-    <table class="table table-bordered">
-        <tr>
-            <th>Name</th>
-            <th colspan=2>Actions</th>
-             
-        </tr>
-        <% @courses.each do |c|%>
-        <tr>
-        <td><%= c.name%></td>
-        <td colspan=2><%= link_to 'Edit', edit_course_path(c), class: "btn btn-info" %><%= button_to 'Delete',  c , method: :delete, class: "btn btn-danger",data: {confirm: "Are you sure?"} %></td>
-        </tr>
-        <% end %>
-      </table>
-
-<% end %>
+   </div>
+   <br><br>
+   <table class="table table-bordered text-center">
+      <h4>ALL COURSES</h4>
+      <br>
+      <tr>
+         <th>Course</th>
+         <th colspan=2>Click To Register</th>
+      </tr>
+      <% @courses.each do |c|%>
+      <tr>
+         <td><%= c.name%></td>
+         <td colspan=2><%= link_to 'Register Now', registered_courses_path(course_id: c.id, student_id: current_student.id), method: :post, class: "btn btn-info", data: { confirm: 'Are you sure?' }%></td>
+      </tr>
+      <% end %>
+   </table>
+   <% else %>
+   <%= link_to 'ADD NEW COURSE', new_course_path, class: "btn btn-primary" %> <br><br>
+   <table class="table table-bordered">
+      <tr>
+         <th>Name</th>
+         <th colspan=2>Actions</th>
+      </tr>
+      <% @courses.each do |c|%>
+      <tr>
+         <td><%= c.name%></td>
+         <td colspan=2><%= link_to 'Edit', edit_course_path(c), class: "btn btn-info" %><%= button_to 'Delete',  c , method: :delete, class: "btn btn-danger",data: {confirm: "Are you sure?"} %></td>
+      </tr>
+      <% end %>
+   </table>
+   <% end %>
 </div>

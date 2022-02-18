@@ -4,6 +4,7 @@ class RegisteredCoursesController < ApplicationController
   end
 
   def show
+    @st_grade = current_student.registered_courses.find_by(params[:id])
   end
 
   def new
@@ -29,7 +30,7 @@ class RegisteredCoursesController < ApplicationController
     @rc = RegisteredCourse.find_by(course_id: params[:id])
       if @rc.update(rc_params)
         flash[:success] = "Register course was successfully updated"
-        redirect_to @courses_path
+        redirect_to students_path
       else
         flash[:error] = "Something went wrong"
         render 'edit'

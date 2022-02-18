@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   def index
     @courses = Course.all
+    @st_courses = current_student.courses.all
   end
 
   

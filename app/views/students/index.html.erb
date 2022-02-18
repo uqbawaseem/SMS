@@ -16,7 +16,7 @@
             <td>
                 <% s.courses.each do |rc|%>
                     <div class="d-flex">
-                        <%= rc.name.capitalize%>&nbsp;&nbsp;  
+                        <%= rc.name.capitalize%>&nbsp;&nbsp;
                         <%= link_to 'Edit Grades', edit_registered_course_path(rc), class: "text-primary text-decoration-none", style: "font-size: 13px;"%>
                     </div>
 
