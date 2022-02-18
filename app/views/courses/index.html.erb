@@ -14,7 +14,7 @@
         <% @courses.each do |c|%>
         <tr>
         <td><%= c.name%></td>
-        <td colspan=2><%= link_to 'Register Now', registered_courses_path(course_id: c.id, grade: " ", student_id: current_student.id), method: :post, class: "btn btn-info", data: { confirm: 'Are you sure?' }%></td>
+        <td colspan=2><%= link_to 'Register Now', registered_courses_path(course_id: c.id, student_id: current_student.id), method: :post, class: "btn btn-info", data: { confirm: 'Are you sure?' }%></td>
 
         </tr>
         <% end %>
