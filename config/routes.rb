@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     get '/students/sign_out' => 'devise/sessions#destroy'     
  end
  resources :courses
+ resources :registered_courses
 
 end
