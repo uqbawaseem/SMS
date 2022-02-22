@@ -1,5 +1,12 @@
-
-efasf
-<div class="container">
-    <p><%= @st_grade.grade%></p>
+<div class="container-fluid m-3">
+    
+    <p>Your grades : 
+        <strong>
+        <% if @st_grade.grade?%>
+            <%= @st_grade.grade%>
+        <% else %>
+        you have not graded yet!    
+        <% end %>
+        </strong
+    ></p>
 </div>

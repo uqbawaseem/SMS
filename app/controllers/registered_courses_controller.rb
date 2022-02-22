@@ -1,10 +1,6 @@
 class RegisteredCoursesController < ApplicationController
-  def index
-
-  end
-
   def show
-    @st_grade = current_student.registered_courses.find_by(params[:id])
+    @st_grade = RegisteredCourse.find_by(student_id: current_student.id, course_id: params[:id])
   end
 
   def new

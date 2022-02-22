@@ -2,6 +2,9 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all
     @st_courses = current_student.courses.all
+    @res_courses = current_student.registered_courses.all
+    # @st_reg_cou = current_student.courses.include? c
+
   end
 
   

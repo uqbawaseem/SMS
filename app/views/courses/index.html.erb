@@ -1,22 +1,33 @@
+<!-- Nav bar -->
 <%= render 'homes/navbar' %>
+<!-- Index page starting for here-->
 <div class="container mt-5">
-   <% if current_student.role == true%>
-   <button class="accordion text-primary"><strong>CLICK TO VIEW YOUR REGISTER COURSES</strong></button>
+<% if current_student.role == true%>
+<!-- Section for registered courses -->
+   <button class="accordion text-primary" onclick="toggle()"><strong>CLICK TO VIEW YOUR REGISTER COURSES</strong></button>
    <div class="panel">
       <table class="table table-bordered text-center">
          <tr>
-            <th>Course</th>
+            <th>Course</th>   
             <th>Grade</th>
          </tr>
          <% @st_courses.each do |st_co|%>
          <tr>
             <td><%= st_co.name.capitalize%></td>
-            <td><%= link_to 'View Grade', registered_course_path(st_co), class: "btn btn-info" %></td>
+            <td>
+                <%= link_to 'View Grade', registered_course_path(st_co), class: "btn btn-info", data: { confirm: 'Are you sure'}%> 
+                <%
+=begin%>
+ <%= link_to 'Unregister', registered_course_path(st_co_, method: :delete, class: "btn btn-info", data: { confirm: 'Are you sure to unregister?'}%> 
+<%
+=end%>
+            </td>
          </tr>
          <% end %>
       </table>
    </div>
    <br><br>
+<!-- Section for All courses -->
    <table class="table table-bordered text-center">
       <h4>ALL COURSES</h4>
       <br>
@@ -27,7 +38,13 @@
       <% @courses.each do |c|%>
       <tr>
          <td><%= c.name%></td>
-         <td colspan=2><%= link_to 'Register Now', registered_courses_path(course_id: c.id, student_id: current_student.id), method: :post, class: "btn btn-info", data: { confirm: 'Are you sure?' }%></td>
+         <td colspan=2>
+            <% if current_student.courses.include? c  %>
+               <span class= "text-secondary">Registered</span>
+            <% else %>
+               <%= link_to 'Register Now', registered_courses_path(course_id: c.id, student_id: current_student.id), method: :post, class: "btn btn-info", data: { confirm: 'Are you sure?' }%>
+            <% end %>
+         </td>
       </tr>
       <% end %>
    </table>
