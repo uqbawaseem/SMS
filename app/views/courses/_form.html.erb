@@ -1,6 +1,5 @@
-<%= form_for @course do |f|%>
+ <%= form_for @course do |f| %>
 <%= f.label :Name%>
-<%= f.text_field :name%><br>
-
-<%= f.submit%>
-<% end %>
+<%= f.text_field :name%><br>     
+<%=f.submit "Search", class: "search-btn"%>
+    <% end %>

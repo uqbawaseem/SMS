@@ -3,6 +3,8 @@ class CoursesController < ApplicationController
     @courses = Course.all
     @st_courses = current_student.courses.all
     @res_courses = current_student.registered_courses.all
+    @course = Course.new
+
     # @st_reg_cou = current_student.courses.include? c
 
   end
@@ -14,7 +16,6 @@ class CoursesController < ApplicationController
 
        
    def new
-    @course = Course.new
   end
 
 

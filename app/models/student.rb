@@ -1,4 +1,5 @@
 class Student < ApplicationRecord
+  validates :name, :email,:encrypted_password, presence: true
   validates :roll_no, uniqueness: true
   has_many :registered_courses
   has_many :courses, through: :registered_courses, :dependent => :destroy
