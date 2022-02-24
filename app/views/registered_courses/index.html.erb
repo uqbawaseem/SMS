@@ -1,2 +1,24 @@
-<h1>RegisteredCourses#index</h1>
-<p>Find me in app/views/registered_courses/index.html.erb</p>
+<%= render 'homes/navbar' %>
+<div class="container mt-5">
+    <h4>REGISTERED COURSES GRADES</h4><br>
+    <table class="table table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Grade</th>
+        </tr>
+        <% @registered_courses.each do |reg|%>
+       
+        <tr>
+            <td>
+
+            <td>
+                <% if reg.grade%>
+                <%= reg.grade%>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_registered_course_path(reg), class: "btn btn-info btn-sm" %>
+                <% else %>
+                <strong>You aren't graded yet!</strong>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_registered_course_path(reg), class: "btn btn-info" %>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </table>
+</div>

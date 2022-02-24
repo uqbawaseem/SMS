@@ -1,6 +1,9 @@
 class RegisteredCoursesController < ApplicationController
-  def show
-    @st_grade = RegisteredCourse.find_by(student_id: current_student.id, course_id: params[:id])
+  before_action :registered_course_find, only:[:edit, :update]
+
+  def index
+    @registered_courses= RegisteredCourse.where(student_id: params[:id])
+    
   end
 
   def new
@@ -17,13 +20,10 @@ class RegisteredCoursesController < ApplicationController
     
   end
   
-
   def edit
-    @rc = RegisteredCourse. find_by(course_id: params[:id])
   end
   
   def update
-    @rc = RegisteredCourse.find_by(course_id: params[:id])
       if @rc.update(rc_params)
         flash[:success] = "Register course was successfully updated"
         redirect_to students_path
@@ -33,8 +33,10 @@ class RegisteredCoursesController < ApplicationController
       end
   end
   
-
   private 
+  def registered_course_find 
+    @rc = RegisteredCourse.find(params[:id])
+  end
   def rc_params
     params.require(:registered_course).permit(:grade)
   end

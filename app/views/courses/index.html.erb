@@ -2,32 +2,37 @@
 <%= render 'homes/navbar' %>
 <!-- Index page starting for here-->
 <div class="container mt-5">
-<% if current_student.role == true%>
-<!-- Section for registered courses -->
-   <button class="accordion text-primary" onclick="toggle()"><strong>CLICK TO VIEW YOUR REGISTER COURSES</strong></button>
-   <div class="panel">
-      <table class="table table-bordered text-center">
-         <tr>
-            <th>Course</th>   
-            <th>Grade</th>
-         </tr>
-         <% @st_courses.each do |st_co|%>
-         <tr>
-            <td><%= st_co.name.capitalize%></td>
-            <td>
-                <%= link_to 'View Grade', registered_course_path(st_co), class: "btn btn-info"%> 
-                <%
-=begin%>
- <%= link_to 'Unregister', registered_course_path(st_co_, method: :delete, class: "btn btn-info", data: { confirm: 'Are you sure to unregister?'}%> 
-<%
-=end%>
-            </td>
-         </tr>
-         <% end %>
-      </table>
+   <% if current_student.role == true%>
+   <!-- Section for registered courses -->
+   <div class="accordion accordion-flush" id="accordionFlushExample">
+   <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingOne">
+         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+         CLICK TO VIEW YOUR REGISTER COURSES
+         </button>
+      </h2>
+      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+         <div class="accordion-body">
+            <table class="table table-bordered text-center">
+               <tr>
+                  <th>Course</th>   
+                  <th>Grade</th>
+               </tr>
+               <% @st_courses.each do |st_co|%>
+               <tr>
+                  <td><%= st_co.name.capitalize%></td>
+                  <td>
+                     <%= link_to 'View Grade', registered_course_path(st_co), class: "btn btn-info" %> 
+                  </td>
+               </tr>
+               <% end %>
+            </table>
+         </div>
+         <br><br>
+      </div>
+      </div>
    </div>
-   <br><br>
-<!-- Section for All courses -->
+   <!-- Section for All courses -->
    <table class="table table-bordered text-center">
       <h4>ALL COURSES</h4>
       <br>
@@ -58,7 +63,12 @@
       <% @courses.each do |c|%>
       <tr>
          <td><%= c.name%></td>
-         <td colspan=2><%= link_to 'Edit', edit_course_path(c), class: "btn btn-info" %><%= button_to 'Delete',  c , method: :delete, class: "btn btn-danger",data: {confirm: "Are you sure?"} %></td>
+         <td>
+            <ul class="list-group list-group-flush">
+               <li class="list-group-item"><%= link_to 'Edit', edit_course_path(c), class: "btn btn-info" %></li>
+               <li class="list-group-item"><%= button_to 'Delete',  c , method: :delete, class: "btn btn-danger btn-sm",data: {confirm: "Are you sure?"} %></li>
+            </ul>
+         </td>
       </tr>
       <% end %>
    </table>

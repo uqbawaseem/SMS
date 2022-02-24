@@ -1,41 +1,45 @@
 class CoursesController < ApplicationController
+  before_action :course_find, only:[:show, :edit, :update, :destroy]
   def index
     @courses = Course.all
-    @st_courses = current_student.courses.all
-    @res_courses = current_student.registered_courses.all
-    @course = Course.new
-
+    @st_courses = current_student.courses
+    @res_courses = current_student.registered_courses
     # @st_reg_cou = current_student.courses.include? c
 
   end
 
   
   def show
-    course_find
   end
 
        
    def new
+    @course = Course.new
   end
 
 
   def create
     @course = Course.new(course_params)
-    if @course.save
-      redirect_to courses_path 
-    else
-      render :new, notice: 'course was not created.'
+    respond_to do |format|
+      if @course.save
+        format.js
+       format.html { redirect_to courses_path}
+       format.json { render :index, status: :created, location: @course }
+      else
+        format.js
+       format.html { render :new }
+       format.json { render json: @course.errors, status: :unprocessable_entity }
+     end
     end
+   
   end
 
 
   def edit
-    course_find
   end
 
 
   def update
-    course_find
     if @course.update(course_params)
       redirect_to courses_path
     else
@@ -45,7 +49,6 @@ class CoursesController < ApplicationController
 
 
   def destroy
-    course_find
         if @course.destroy
       redirect_to courses_path
     else    	
