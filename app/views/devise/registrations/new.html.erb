@@ -5,7 +5,7 @@
     <% if @student.errors.any? %>
   <% @student.errors.each do |m|%>
 
-    <%= m.message%>
+    <%= m.full_message%>
   <% end %>
   <% end %>
 
