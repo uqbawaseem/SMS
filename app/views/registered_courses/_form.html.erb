@@ -1,5 +1,11 @@
 <%= form_for @rc do |f|%>
-<%= f.label :grade%>
-<%= f.text_field :grade%><br>
-<%= f.submit%>
+<div class="modal-body">
+    <%= f.label :grade%>
+    <%= f.text_field :grade%><br>
+    
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <%= f.submit%>
+</div>
 <% end %>
