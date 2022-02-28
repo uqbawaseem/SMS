@@ -8,31 +8,7 @@ import "bootstrap"
 //= require popper
 //= require bootstrap
 
-//validador jquery
-$('#new_student').validate({
-    rules: {
-      'student[password]': {
-        required: true,
-        maxlength: 100
-      },
-      'student[email]': {
-        required: true, 
-        email: true, 
-        maxlength: 150
-      }
-    },
-    messages: {
-      'student[password]': {
-          required: "Required Field",
-          maxlength: "Name too big, max size 100"
-      },
-      'student[email]': {
-          required: "Required Field",
-          email: "Invalid email",
-          maxlength: "Email too big, max size 150"
-      }
-    }
-  });
+
 
 import Rails from "@rails/ujs";
 Rails.start();
