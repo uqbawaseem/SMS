@@ -2,7 +2,28 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
+  <% if @student.errors.any? %>
+  <% @student.errors.full_messages.each do |m|%>
+    <%= m%>
+  <% end %>
+  <% end %>
 
+  <div class="field">
+    <%= f.label :"Role" %><br />
+    <%= f.select :role, Student.roles.keys %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :"Roll #" %><br />
+    <%= f.number_field :roll_no, autofocus: true%>
+  </div>
+  
+
+  <div class="field">
+    <%= f.label :Name %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "email" %>
+  </div>
+  
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -35,9 +56,5 @@
     <%= f.submit "Update" %>
   </div>
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>

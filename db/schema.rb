@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_17_131903) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_28_061210) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -37,10 +37,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_17_131903) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.integer "roll_no"
-    t.boolean "role", default: true
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.integer "role", default: 1
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_students_on_unlock_token", unique: true

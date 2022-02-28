@@ -3,7 +3,10 @@ class RegisteredCoursesController < ApplicationController
 
   def index
     @registered_courses= RegisteredCourse.where(student_id: params[:id])
-    
+  end
+
+  def show
+    @grades = current_student.registered_courses.find_by(course_id: params[:id])
   end
 
   def new
@@ -11,7 +14,7 @@ class RegisteredCoursesController < ApplicationController
   end
 
   def create 
-    if current_student.role == true
+    if current_student.role == "student"
       @rc = RegisteredCourse.create(student_id: params[:student_id], course_id: params[:course_id], grade: "")
       redirect_to courses_path
     else

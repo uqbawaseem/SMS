@@ -2,12 +2,12 @@
 <%= render 'homes/navbar' %>
 <!-- Index page starting for here-->
 <div class="container mt-5">
-   <% if current_student.role == true%>
+   <% if current_student.role == "student"%>
    <!-- Section for registered courses -->
    <div class="accordion accordion-flush" id="accordionFlushExample">
    <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
-         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+         <button class="accordion-button collapsed border border-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
          CLICK TO VIEW YOUR REGISTER COURSES
          </button>
       </h2>

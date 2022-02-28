@@ -1,10 +1,10 @@
 class CoursesController < ApplicationController
+  before_action :authenticate_student!
   before_action :course_find, only:[:show, :edit, :update, :destroy]
   def index
     @courses = Course.all
     @st_courses = current_student.courses
     @res_courses = current_student.registered_courses
-    # @st_reg_cou = current_student.courses.include? c
 
   end
 
