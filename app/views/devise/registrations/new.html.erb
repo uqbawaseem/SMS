@@ -1,5 +1,5 @@
-<h2>Sign up</h2>
-
+<div class="container">
+  <h2>Sign up</h2>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
     <% if @student.errors.any? %>
@@ -23,12 +23,6 @@
     <%= f.label :Name %><br />
     <%= f.text_field :name, autofocus: true%>
   </div>
-<!--
-  <div class="field">
-    <%= f.label :Role %><br />
-    <%= f.text_field :role, autofocus: true%>
-  </div>
-  <!-->
 
   <div class="field">
     <%= f.label :email %><br />
@@ -54,3 +48,4 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>

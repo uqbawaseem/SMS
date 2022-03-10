@@ -1,0 +1,16 @@
+<%= render 'homes/navbar' %>
+<div class="container mt-5">
+    <h3>Question: <%= @question.question.capitalize+ " ."%></h3><br>
+
+        <% @replies.each do |replies|%>
+    <ul>
+        <% if replies.present?%>
+        <li><%= replies.reply%>
+            <span class="float-end">Student Name: <%= replies.student.name%></span>
+        </li>
+        <hr>
+        <% else %>
+        <% end %>
+    </ul>
+        <% end %>
+</div>

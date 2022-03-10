@@ -25,6 +25,7 @@ class RegisteredCoursesController < ApplicationController
   
   def edit
     
+    
   end
   
   def update

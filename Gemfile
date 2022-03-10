@@ -78,3 +78,5 @@ gem 'bootstrap', '~> 5.1.3'
 gem 'jquery-rails'
 gem 'pry'
 gem 'cssbundling-rails'
+gem 'simple_form'
+gem "cocoon"

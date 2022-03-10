@@ -1,0 +1,7 @@
+<%= simple_form_for @reply, remote: true do |f|%>
+<%= f.input :reply, label: 'Create new reply: '%>
+<%= f.input :student_id, as: :hidden,input_html: {value: "#{current_student.id}"}%>
+<%= f.input :question_id, as: :hidden,input_html: {value: "#{@question.id}"}%>
+
+<%= f.submit%>
+<% end %>

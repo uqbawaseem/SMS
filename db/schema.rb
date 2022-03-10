@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_28_061210) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_09_062254) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "question"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -25,6 +31,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_061210) do
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_registered_courses_on_course_id"
     t.index ["student_id"], name: "index_registered_courses_on_student_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.string "reply"
+    t.integer "student_id", null: false
+    t.integer "question_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_replies_on_question_id"
+    t.index ["student_id"], name: "index_replies_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -48,4 +64,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_061210) do
 
   add_foreign_key "registered_courses", "courses"
   add_foreign_key "registered_courses", "students"
+  add_foreign_key "replies", "questions"
+  add_foreign_key "replies", "students"
 end

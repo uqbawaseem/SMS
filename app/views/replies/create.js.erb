@@ -1,0 +1,8 @@
+<% if @reply.errors.any? %>
+<% @reply.errors.each do |e|%>
+alert('<%= e.message%>');
+<% end %>
+<% else %>
+
+
+<% end %>

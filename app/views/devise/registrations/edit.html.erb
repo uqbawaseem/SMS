@@ -1,60 +1,58 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <% if @student.errors.any? %>
-  <% @student.errors.full_messages.each do |m|%>
-    <%= m%>
-  <% end %>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :"Role" %><br />
-    <%= f.select :role, Student.roles.keys %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :"Roll #" %><br />
-    <%= f.number_field :roll_no, autofocus: true%>
-  </div>
-  
-
-  <div class="field">
-    <%= f.label :Name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "email" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+<div class="container mt-5">
+  <h2>Edit <%= current_student.name.capitalize %></h2>
+  <% if current_student.role == "admin" %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, 'data-turbo' => "false" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.input :roll_no, as: :integer%>
+      <%= f.input :name, label: 'Your name please'%>
+      <%= f.input :email, placeholder: 'user@domain.com' %>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+      <%= f.input :password, hint: 'No special characters.' %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      <%= f.input :password_confirmation, hint: 'No special characters.'%>
+      <%= f.input :current_password, hint: 'we need your current password to confirm your changes.'%><br>
+      <!-- Questions form -->
+      <div class="place_to_add">
+        <%= f.simple_fields_for :questions do |question|%>
+            <%= render 'question_fields', {:question=> question, :f=> f}%>
+        <% end %>
+      </div>
+        <br>
+        <%= link_to_add_association "Add question", f, :questions,
+            form_name: 'question',
+            class: "btn btn-outline-success btn-sm float-end js",
+            data: {association_insertion_method: "append", association_insertion_node: ".place_to_add"}
+        %>
+      <div class= "btn">
+      <%= f.button :submit, class: 'btn btn-primary'%>
+      </div>
     <% end %>
-  </div>
+  <% else %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, 'data-turbo' => "false" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.input :roll_no, as: :integer%>
+      <%= f.input :name, label: 'Your name please'%>
+      <%= f.input :email, placeholder: 'user@domain.com' %>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+      <%= f.input :password, hint: 'No special characters.' %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      <%= f.input :password_confirmation, hint: 'No special characters.'%>
+      <%= f.input :current_password, hint: 'we need your current password to confirm your changes.'%><br>
+      <div class= "btn">
+      <%= f.button :submit, class: 'btn btn-primary'%>
+      </div>
+    <% end %>
+  <% end %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<%= link_to "Back", :back %>
+  <%= link_to "Back", :back %>
+</div>
